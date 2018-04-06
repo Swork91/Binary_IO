@@ -1,22 +1,24 @@
 package TestingSteam;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.Scanner;
+import java.io.*;
 
 public abstract class TestFileStream {
 
-	public static void main(String[] args) throws FileNotFoundException {
-		String file = "tempOutput.txt";
+	public static void main(String[] args) throws IOException {
+		String textfile = "tempOutput.txt";
+		String datafile = "tempOutput.dat";
 		
-		PrintWriter output = new PrintWriter(file);
-		output.print("test1234 I slammed my elbow in a door");
-		
+		FileOutputStream output = new FileOutputStream(datafile);
+		for (int i=0; i<10; i++) {
+			output.write(i);
+		}
 		output.close();
-		Scanner input = new Scanner(file);//(new File(file));
-		System.out.println(input.nextLine());
 		
+		FileInputStream input = new FileInputStream(datafile);
+		int foo;
+		while ((foo = input.read()) != -1) {
+			System.out.println(foo+" ");
+		}
+		input.close();
 	}
-
 }
